@@ -6,3 +6,11 @@ services:
     stdin_open: true
     tty: true
     entrypoint: ["mix", "send.application"]
+  test:
+    image: developer_application:latest
+    entrypoint: ["mix"]
+    command: ["test"]
+    environment:
+      MIX_ENV: test
+    volumes:
+      - .:/app
