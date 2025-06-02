@@ -1,0 +1,8 @@
+services:
+  developer_application:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    entrypoint: ["mix", "send.application"]
