@@ -51,8 +51,6 @@ defmodule Mix.Tasks.Send.Application do
     # Fetch or reuse cached token
     case get_or_fetch_token(token_agent) do
       {:ok, token} ->
-        Mix.shell().info(IO.ANSI.cyan() <> "\n→ Using token: #{token}" <> IO.ANSI.reset())
-
         # Build payload
         payload_map = %{
           "name" => name,

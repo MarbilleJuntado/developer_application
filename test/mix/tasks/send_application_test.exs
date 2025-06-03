@@ -15,7 +15,7 @@ defmodule Mix.Tasks.Send.ApplicationTest do
           assert SendApplication.prompt_nonempty(prompt) == "Charlotte"
         end)
 
-      # The captured output should include our warnings about empty inputs
+      # The captured output should include warnings about empty inputs
       assert result =~ "→ Cannot be empty. You have 2 attempt(s) left."
       assert result =~ "→ Cannot be empty. You have 1 attempt(s) left."
     end
@@ -161,7 +161,6 @@ defmodule Mix.Tasks.Send.ApplicationTest do
 
       result =
         capture_io(user_input, fn ->
-          # We need to start a field_agent ourselves:
           {:ok, field_agent} = Agent.start(fn -> 5 end)
           map = SendApplication.do_gather_extra_info(field_agent, %{})
           Agent.stop(field_agent)
@@ -230,7 +229,6 @@ defmodule Mix.Tasks.Send.ApplicationTest do
     test "returns cached token on second invocation without HTTP call" do
       {:ok, agent} = Agent.start(fn -> "cached_token_456" end)
 
-      # Because it's already set, get_or_fetch_token should immediately return it
       assert SendApplication.get_or_fetch_token(agent) == {:ok, "cached_token_456"}
 
       Agent.stop(agent)
