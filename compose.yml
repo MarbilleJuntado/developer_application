@@ -7,10 +7,11 @@ services:
     tty: true
     entrypoint: ["mix", "send.application"]
   test:
-    image: developer_application:latest
-    entrypoint: ["mix"]
-    command: ["test"]
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MIX_ENV: test
     environment:
       MIX_ENV: test
-    volumes:
-      - .:/app
+    entrypoint: ["mix", "test"]
