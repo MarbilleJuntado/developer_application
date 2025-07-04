@@ -335,8 +335,11 @@ defmodule Mix.Tasks.Send.Application do
 
   def extract_token(body) do
     case Jason.decode(body) do
-      {:ok, %{"token" => tok}} ->
-        tok
+      {:ok, %{"result" => token}} ->
+        token
+
+      {:ok, %{"token" => token}} ->
+        token
 
       {:ok, body} ->
         String.trim(body)
